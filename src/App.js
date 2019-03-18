@@ -73,7 +73,7 @@ class App extends Component {
                               onClick={() => this.handlePlayPause(entry.id)}
                             />
                           </div>
-                          <audio id={entry.id} src={entry.src} type="audio/ogg"></audio>
+                          <audio id={entry.id} src={entry.src} type="audio/mpeg"></audio>
                         </div>
                       </React.Fragment>
                     );
@@ -93,7 +93,7 @@ class App extends Component {
                               onClick={() => this.handlePlayPause(entry.id)}
                             />
                           </div>
-                          <audio id={entry.id} src={entry.src} type="audio/ogg"></audio>
+                          <audio id={entry.id} src={entry.src} type="audio/mpeg"></audio>
                         </div>
                       </React.Fragment>
                     )
