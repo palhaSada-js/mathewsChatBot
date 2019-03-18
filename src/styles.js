@@ -51,5 +51,17 @@ export const styles = {
         marginTop: '1rem',
         fontFamily: 'Sniglet, cursive',
         fontSize: '1.5rem',
+    },
+    about: {
+        fontFamily: 'Sniglet, cursive',
+        fontSize: '1.2rem',
+        marginBottom: '5rem'
+    },
+    list: {
+        listStyleType: 'none',
+    },
+    title: {
+        color: 'green'
     }
+    
 }  

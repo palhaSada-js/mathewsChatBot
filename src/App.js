@@ -36,6 +36,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
+        
           <h1>MathewSZinho</h1>
           <div style={styles.mainContainer}>
             {feed.map(entry => {
@@ -109,6 +110,7 @@ class App extends Component {
             })}
             <input id="inputField" style={styles.input} placeholder='escreva sua mensagem para mathewszinho' onKeyDown={(e) => e.keyCode === 13 ? sendMessage(e.target.value) : null} />
           </div>
+        <About />
         </header>
       </div>
     );
@@ -118,6 +120,38 @@ class App extends Component {
 const mapStateToProps = state => ({
   feed: state
 });
+
+class About extends Component {
+  render() {
+    return (
+      <div style={styles.about}>
+
+        <p style={styles.title}> Lista de Perguntas sugeridas </p>
+        <ul style={styles.list}>
+          <li>bom dia</li>
+          <li>canta uma musica ae</li>
+          <li>pq vc não veio trabalhar?</li>
+          <li>e os role?</li>
+          <li>me ajuda ai, mano</li>
+          <li>a mina era zuada?</li>
+          <li>canta um rap ai cuzão</li>
+          <li>deixa eu te contar uma fita</li>
+          <li>e o minecraft?</li>
+          <li>conta a história do mendigo</li>
+          <li>eae</li>
+          <li>q q eu falo pros cara?</li>
+          <li>explica direito ai</li>
+          <li>curte fandangos?</li>
+          <li>me adiciona lá carai</li>
+          <li>eae, ta de boa?</li>
+          <li>me chama de harry</li>
+          <li>conta a fita do uber</li>
+        </ul>
+        <p style={styles.title}> Pode parecer React mas foi feito com Palha$ada.Js </p>
+      </div>
+    );
+  }
+}
 
 
 export default connect(mapStateToProps, { sendMessage })(App);
