@@ -11,49 +11,8 @@ library.add(faPlayCircle, faPauseCircle)
 
 class App extends Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      playing: true,
-      audio: [{
-        id: 1,
-        message: 'bom dia, tudo bem?',
-        sender: true
-      }, {
-        id: 2,
-        src: 'https://instaud.io/_/3qYU.ogg',
-        sender: false
-      }, {
-        id: 3,
-        message: 'eita, conta mais dessa história ai ahhaha',
-        sender: true
-      }, {
-        id: 4,
-        src: 'https://instaud.io/_/3qYU.ogg',
-        sender: false
-      }]
-    }
-  }
 
   messageTemp
-
-  createMessage(event) {
-    this.messageTemp = event.target.value
-    if (event.keyCode === 13) {
-      this.sendMessage();
-    }
-  }
-  sendMessage() {
-    this.state.audio.push({
-      id: this.createUUID(),
-      message: this.messageTemp,
-      sender: true
-    });
-    sendMessage(document.getElementById('inputField').value);
-    document.getElementById('inputField').value = '';
-    this.forceUpdate();
-
-  }
 
   handlePlayPause(id) {
     const audio = document.getElementById(id);
@@ -91,32 +50,53 @@ class App extends Component {
                   </div>)
               } else {
                 if (entry.src) {
-
-                  return (
-                    <React.Fragment key={entry.id + 'frag'}>
-                      <div style={styles.containter} key={entry.id + 'text'}>
-                        <img style={styles.img} src='https://media.licdn.com/dms/image/C4E03AQEC3kDfzMPS4g/profile-displayphoto-shrink_800_800/0?e=1558569600&v=beta&t=B6qHJQRr7gEHjytbQbX-tYcypgPqStIlUWA6aQm_2ww' alt="profile" />
-                        <div style={styles.text}>
-                          <p> {entry.text} </p>
+                  if (entry.text.length > 0) {
+                    return (
+                      <React.Fragment key={entry.id + 'frag'}>
+                        <div style={styles.containter} key={entry.id + 'text'}>
+                          <img style={styles.img} src='https://media.licdn.com/dms/image/C4E03AQEC3kDfzMPS4g/profile-displayphoto-shrink_800_800/0?e=1558569600&v=beta&t=B6qHJQRr7gEHjytbQbX-tYcypgPqStIlUWA6aQm_2ww' alt="profile" />
+                          <div style={styles.text}>
+                            <p> {entry.text} </p>
+                          </div>
                         </div>
-                      </div>
-                      <div style={styles.containter}>
-                        <img style={styles.img} src='https://media.licdn.com/dms/image/C4E03AQEC3kDfzMPS4g/profile-displayphoto-shrink_800_800/0?e=1558569600&v=beta&t=B6qHJQRr7gEHjytbQbX-tYcypgPqStIlUWA6aQm_2ww' alt="profile" />
-                        <div style={styles.width}>
-                          <div id={entry.id + 'Proggress'} style={styles.proggress}></div>
+                        <div style={styles.containter}>
+                          <img style={styles.img} src='https://media.licdn.com/dms/image/C4E03AQEC3kDfzMPS4g/profile-displayphoto-shrink_800_800/0?e=1558569600&v=beta&t=B6qHJQRr7gEHjytbQbX-tYcypgPqStIlUWA6aQm_2ww' alt="profile" />
+                          <div style={styles.width}>
+                            <div id={entry.id + 'Proggress'} style={styles.proggress}></div>
+                          </div>
+                          <div style={styles.buttons}>
+                            <FontAwesomeIcon icon={
+                              document.getElementById(entry.id) && document.getElementById(entry.id).paused ?
+                                'play-circle' : !document.getElementById(entry.id) ?
+                                  'play-circle' : 'pause-circle'} size='1x' style={styles.playButton}
+                              onClick={() => this.handlePlayPause(entry.id)}
+                            />
+                          </div>
+                          <audio id={entry.id} src={entry.src} type="audio/ogg"></audio>
                         </div>
-                        <div style={styles.buttons}>
-                              <FontAwesomeIcon icon={
-                                document.getElementById(entry.id) && document.getElementById(entry.id).paused ?
-                                  'play-circle' : !document.getElementById(entry.id) ?
-                                    'play-circle' : 'pause-circle'} size='1x' style={styles.playButton}
-                                    onClick={() => this.handlePlayPause(entry.id)}
-                              />
+                      </React.Fragment>
+                    );
+                  } else {
+                    return (
+                      <React.Fragment key={entry.id + 'frag'}>
+                        <div style={styles.containter}>
+                          <img style={styles.img} src='https://media.licdn.com/dms/image/C4E03AQEC3kDfzMPS4g/profile-displayphoto-shrink_800_800/0?e=1558569600&v=beta&t=B6qHJQRr7gEHjytbQbX-tYcypgPqStIlUWA6aQm_2ww' alt="profile" />
+                          <div style={styles.width}>
+                            <div id={entry.id + 'Proggress'} style={styles.proggress}></div>
+                          </div>
+                          <div style={styles.buttons}>
+                            <FontAwesomeIcon icon={
+                              document.getElementById(entry.id) && document.getElementById(entry.id).paused ?
+                                'play-circle' : !document.getElementById(entry.id) ?
+                                  'play-circle' : 'pause-circle'} size='1x' style={styles.playButton}
+                              onClick={() => this.handlePlayPause(entry.id)}
+                            />
+                          </div>
+                          <audio id={entry.id} src={entry.src} type="audio/ogg"></audio>
                         </div>
-                        <audio id={entry.id} src={entry.src} type="audio/ogg"></audio>
-                      </div>
-                    </React.Fragment>
-                  )
+                      </React.Fragment>
+                    )
+                  }
                 }
                 return (
                   <div key={entry.id} style={styles.containter}>
